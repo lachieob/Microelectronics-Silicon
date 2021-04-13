@@ -1,0 +1,26 @@
+#define scoring mesh
+/score/create/boxMesh boxMesh_1
+/score/mesh/boxSize 50. 50. 50. um
+/score/mesh/translate/xyz 0. 0. 50. um
+/score/mesh/nBin 1 1 500
+
+# define scorers and filters
+/score/quantity/energyDeposit eDep
+/score/filter/particle eMinusFilter e-
+/score/quantity/flatSurfaceCurrent betacount 1 T T
+/score/filter/particle eMinusFilter e-
+
+/score/close
+/score/list
+
+/run/beamOn 10000
+
+/score/dumpQuantityToFile boxMesh_1 betacount betacount.txt
+/score/dumpQuantityToFile boxMesh_1 eDep eDep.csv
+
+/score/colorMap/setMinMax ! 0. 1 MeV.
+/score/drawProjection boxMesh_1 betacount
+
+
+
+
